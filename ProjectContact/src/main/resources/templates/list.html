@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}"> 
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<meta charset="UTF-8"/>
+
+
+  <title>Content page 1</title>
+</head>
+
+<body>
+
+		<nav class="navbar navbar-default">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+      		<a class="navbar-brand" href="#">EASY CONTACT</a>
+    	</div>
+    		<ul class="nav navbar-nav">
+      			<li class="active"><a th:href="@{/index}">Home</a></li>
+      			<li><a th:href="@{/formParticuliers}">Rechercher une personne</a></li>
+      			<li><a th:href="@{/formProfessionnels}">Rechercher une organisation</a></li>
+      			<li><a th:href="@{/formProfessionnels}">Consulter un profil</a></li>
+      			<li><a th:href="@{/index2}">Inscription</a></li>
+      			<li><a href="#">Page 3</a></li>
+    			</ul>
+  			</div>
+		</nav>
+
+
+  <section layout:fragment="content">
+    	<div class="container">
+		<div class="panel panel-info">
+			<div class="panel-heading">Annuaire Contacts</div>
+			<div class="panel-body">
+				<form th:action="@{/index}" method="get">
+				<label>Mot Clé</label>
+				<input type="text" name="nom1">
+				<button type="submit" class="btn btn-info">Chercher</button>
+				</form>		
+				<table class="table">
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+					</tr>
+					<tr th:each="prod: ${acteurs}">
+						<td th:text="${prod.id}"></td>
+						<td th:text="${prod.nom}"></td>
+						<td th:text="${prod.prenom}"></td>
+					</tr>
+				</table>
+				<ul class="nav nav-pills">
+					<li th:class="${currentPage==status.index}?'active':''" th:each="page, status: ${pages}">
+						<a th:href="@{index(page=${status.index})}" th:text="${status.index}"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>	
+  </section>
+  <footer>
+    <p layout:fragment="custom-footer">This is some footer content from content page 1</p>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>
